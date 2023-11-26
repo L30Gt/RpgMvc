@@ -9,7 +9,7 @@
 @if (@TempData["Mensagem"] != null)
 {
     <div class="alert alert-success" role="alert">
-        @TempData["Mensagem"]</div>
+        @Html.Raw(TempData["Mensagem"])</div>
 }
 <!--Configuração para exibir mensagem de erro -->
 @if (@TempData["MensagemErro"] != null)
@@ -58,3 +58,5 @@
     null, new { @class = "btn btn-dark" })
 @Html.ActionLink("Embate em grupo!", "DisputaGeral", "Disputas",
     null, new { @class = "btn btn-danger" })
+@Html.ActionLink("Resetar ranking e Restaurar vida!", "ZerarRankingRestaurarVidas", "Personagens",
+    null, new { @class = "btn btn-secondary", onclick = "return confim('Deseja realmente realizar esta ação ?');" })

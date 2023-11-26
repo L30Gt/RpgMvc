@@ -47,10 +47,14 @@
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Deletar", "Delete", new { id = item.Id }
-                    , new { onclick = "return confirm('Deseja realmente deletar este personagem ?');"})
+                         , new { onclick = "return confirm('Deseja realmente deletar este personagem ?');" })
             </td>
         </tr>
     }
 </table>
 @Html.ActionLink("Embate com armas!", "Index", "Disputas",
     null, new { @class = "btn btn-warning" })
+@Html.ActionLink("Embate com habilidades!", "IndexHabilidades", "Disputas",
+    null, new { @class = "btn btn-dark" })
+@Html.ActionLink("Embate em grupo!", "DisputaGeral", "Disputas",
+    null, new { @class = "btn btn-danger" })

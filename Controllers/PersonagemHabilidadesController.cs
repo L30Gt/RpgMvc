@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace RpgMvc.Controllers
 {
-    public class PersonagemHabilidades : Controller
+    public class PersonagemHabilidadesController : Controller
     {
         public string uriBase = "http://leomiguel.somee.com/RpgApi/PersonagemHabilidades/";
 

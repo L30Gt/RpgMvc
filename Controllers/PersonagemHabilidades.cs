@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RpgMvc.Models;
 using Newtonsoft.Json;
-using System.Net.Mime;
 
 namespace RpgMvc.Controllers
 {

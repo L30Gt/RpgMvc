@@ -18,6 +18,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+                
                 HttpClient httpClient = new HttpClient();
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -79,6 +84,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+
                 HttpClient httpClient = new HttpClient();
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -154,6 +164,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+
                 HttpClient httpClient = new HttpClient();
 
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
@@ -201,6 +216,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+
                 string uriComplementar = "Listar";
                 HttpClient httpClient = new HttpClient();
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
@@ -232,6 +252,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+                
                 HttpClient httpClient = new HttpClient();
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

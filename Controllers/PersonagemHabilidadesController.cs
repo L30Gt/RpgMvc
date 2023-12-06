@@ -78,6 +78,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+                
                 string uriComplementar = "GetHabilidades";
                 HttpClient httpClient = new HttpClient();
                 string token = HttpContext.Session.GetString("SessionTokenUsuario");

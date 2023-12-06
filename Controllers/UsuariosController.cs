@@ -72,8 +72,13 @@ namespace RpgMvc.Controllers
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     UsuarioViewModel uLogado = JsonConvert.DeserializeObject<UsuarioViewModel>(serialized);
+
                     HttpContext.Session.SetString("SessionTokenUsuario", uLogado.Token);
                     HttpContext.Session.SetString("SessionUsername", uLogado.Username);
+
+                    HttpContext.Session.SetString("SessionPerfilUsuario", uLogado.Perfil);
+                    HttpContext.Session.SetString("SessionIdUsuario", uLogado.Id.ToString());
+
                     TempData["Mensagem"] = string.Format("Bem-vindo {0}!!!", uLogado.Username);
                     return RedirectToAction("Index", "Personagens");
                 }
@@ -96,6 +101,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+
                 HttpClient httpClient = new HttpClient();
 
                 //Novo: Recuperação informação da sessão
@@ -157,6 +167,11 @@ namespace RpgMvc.Controllers
 
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+
                 HttpClient httpClient = new HttpClient();
                 string login = HttpContext.Session.GetString("SessionUsername");
                 string uriComplementar = $"GetByLogin/{login}";
@@ -272,6 +287,11 @@ namespace RpgMvc.Controllers
         {
             try
             {
+                if(string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
+                
                 HttpClient httpClient = new HttpClient();
                 string login = HttpContext.Session.GetString("SessionUsername");
                 string uriComplementar = $"GetByLogin/{login}";
@@ -295,6 +315,25 @@ namespace RpgMvc.Controllers
                 {
                     throw new System.Exception(serialized);
                 }
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("IndexInformacoes");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Sair()
+        {
+            try
+            {
+                HttpContext.Session.Remove("SessionTokenUsuario");
+                HttpContext.Session.Remove("SessionUsername");
+                HttpContext.Session.Remove("SessionPerfilUsuario");
+                HttpContext.Session.Remove("SessionIdUsuario");
+
+                return RedirectToAction("Index", "Home");
             }
             catch (System.Exception ex)
             {
